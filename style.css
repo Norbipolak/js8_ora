@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;
+}
+.container {
+    max-width: 1080px;
+    margin:15px auto;
+}
+.gallery-frame {
+    width: 500px;
+    height: 500px;
+    border: 1px solid grey;
+    margin: auto; /*középre helyezi*/
+    position: relative;
+}
+/*
+gallery-frame-be csináltunk 3 div-et
+1. img-holder -> amibe beleraktunk egy képet 
+2. class arrow id prev 
+3. class arrow id next
+*/
+/*
+most még nagyobb a kép mint a gallery-holder ->
+*/
+#img-holder img {
+    width:100% /*és így már pont benne van a kép az img-holderben*/
+}
+.arrow{
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 40px;
+    /*
+    még nincsen a helyén a kép alatt van
+    megadjuk a gallery-frame-nek -> position: relative, ennek a prev-nek meg, hogy position:absolute 
+    top: 50% 
+
+    
+    In CSS, using top: 50%; positions an element so that its top edge is vertically centered at 50% of its containing element's height. 
+    However, this alone doesn't center the entire element vertically; it merely moves the top edge to the middle.
+
+    The combination of top: 50%; and transform: translateY(-50%); 
+    will center the entire element vertically within its parent, assuming the parent has a defined height. 
+    It works by moving the element's top to the middle of the parent and then adjusting it upward by half of its own height, 
+    effectively centering it both vertically and horizontally.
+    */
+    position: absolute; 
+    /*mindig az elem ami benne van egy containerben kell, hogy absolute legyen a parent(gallery-frame) pedig relative*/
+    top: 50%;
+    transform: translateY(-50%);
+    /*beállt a heylére, ahova szerettük volna és beleteszük a felt-arrow képet ->*/
+    cursor: pointer; /*mivel ez egy button lesz ezért fontos a curspr :pointer*/
+
+}
+#prev {
+    background-image: url(kepek/left-arrow.png);
+    /*ez nem fog még létszodni, mert a kép 512*512-es 
+    ->
+    akkor ezt a 3 beállítást kell alkalmazni - background-size lehet 100% vagy 80% attól függ
+    */
+    background-size: 80%; /*akár ezt a 3-at at lehetne vinni az arrow class-ba is mert közös tulajdonságok, de inkább itt hagyom*/
+    background-position: center;
+    background-repeat: no-repeat;
+    /*ami közös tulajdonság azt megkapja a class arrow, ami csak a prev-re vonatkozik az marad itt pl.kép*/
+    left: 15px; /* 15 pixels to the right from the left edge of its parent container*/
+}
+#next {
+    background-image: url(kepek/right-arrow.png);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*ami közös tulajdonság azt megkapja a class arrow, ami csak a prev-re vonatkozik az marad itt pl.kép*/
+    right: 15px;
+}
+#img-number {
+    position: absolute; /*ugyanugy mint a next és a prev button*/
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    width: 70px;
+    /*A következő három dolog ha így van beállítva, akkor horizontálisan középre lesz helyezve magát a tag-et*/
+    left:0;
+    right:0;
+    margin:auto;
+    bottom: 15px;
+    border-radius: 5px;
+    /*
+    kézzél beírjuk a mezőjébe, hogy 1/8 és akkor megjelenik a böngészőben
+    és ha azt szeretnénk, hogy módosuljon a számláló -> gallery.js showImg()
+    */
+}
